@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*Julia Dowson
+ * Mr. T
+ * March 23, 2021
+ * This is a basic two player game based off of the old aracade game, Space Race.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,8 +44,10 @@ namespace SpaceRace
         List<int> rightYScrollList = new List<int>();
         List<int> rightXScrollList = new List<int>();
         List<int> obSpeedList = new List<int>();
+
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
+
         SoundPlayer beep = new SoundPlayer(Properties.Resources.beep);
         SoundPlayer gameOverSound = new SoundPlayer(Properties.Resources.gameOver);
         SoundPlayer pointSound = new SoundPlayer(Properties.Resources.point);
@@ -111,6 +119,7 @@ namespace SpaceRace
             }
         }
 
+        //what happens when the space bar is pressed
         public void GameInitialize()
         {
             openingSound.Play();
@@ -165,6 +174,7 @@ namespace SpaceRace
 
             randValue = randGen.Next(0, 101);
 
+            //obstacles are created at random points on either side of the screen
             if (randValue < 6)
             {
                 leftXScrollList.Add(10);
@@ -178,6 +188,7 @@ namespace SpaceRace
                 obSpeedList.Add(randGen.Next(2, 5));
             }
 
+            //moves the obstacles
             for (int i = 0; i < leftXScrollList.Count(); i++)
             {
                 leftXScrollList[i] += obSpeedList[i];
@@ -188,6 +199,27 @@ namespace SpaceRace
                 rightXScrollList[i] -= obSpeedList[i];
             }
 
+            for (int i = 0; i < leftXScrollList.Count(); i++)
+            {
+                if (leftXScrollList[i] > 600)
+                {
+                    leftXScrollList.RemoveAt(i);
+                    leftYScrollList.RemoveAt(i);
+                    obSpeedList.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i < rightXScrollList.Count(); i++)
+            {
+                if (rightXScrollList[i] < 0)
+                {
+                    rightXScrollList.RemoveAt(i);
+                    rightYScrollList.RemoveAt(i);
+                    obSpeedList.RemoveAt(i);
+                }
+            }
+
+            //what happens if an obstacle hits a player
             for (int i = 0; i < leftXScrollList.Count(); i++)
             {
                 Rectangle obRec = new Rectangle(leftXScrollList[i], leftYScrollList[i], obLength, obHeight);
@@ -225,7 +257,8 @@ namespace SpaceRace
                 }
             }
 
-            if (player1Y <= 5)
+            //if the either player gets to the top of the screen
+            if (player1Y <= 3)
             {
                 pointSound.Play();
                 p1Score++;
@@ -233,7 +266,7 @@ namespace SpaceRace
                 player1Y = 340;
                 p1ScoreOutput.Text = $"{p1Score}";
             }
-            else if (player2Y <= 5)
+            else if (player2Y <= 3)
             {
                 pointSound.Play();
                 p2Score++;
@@ -277,6 +310,8 @@ namespace SpaceRace
                     e.Graphics.FillRectangle(whiteBrush, rightXScrollList[i], rightYScrollList[i], obLength, obHeight);
                 }
             }
+
+            //what happens if either player reaches 3 points
             else if (gameState == "gameOver")
             {
                 gameOverSound.Play();
