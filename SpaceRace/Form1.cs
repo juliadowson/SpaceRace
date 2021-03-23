@@ -195,7 +195,7 @@ namespace SpaceRace
                 else if (player2Rec.IntersectsWith(obRec))
                 {
                     player2X = 400;
-                    player2Y = 340;
+                    player2Y = 340; 
                 }
             }
 
