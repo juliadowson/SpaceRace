@@ -190,7 +190,7 @@ namespace SpaceRace
 
             //moves the obstacles
             for (int i = 0; i < leftXScrollList.Count(); i++)
-            {
+            { 
                 leftXScrollList[i] += obSpeedList[i];
             }
 
