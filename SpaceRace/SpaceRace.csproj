@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\160913__dragline777__bassy-sweepdown-talkertr.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\382310__myfox14__game-over-arcade.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\383240__josepharaoh99__bounce.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\328011__astrand__retro-blaster-fire.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace SpaceRace
 {
@@ -39,6 +40,10 @@ namespace SpaceRace
         List<int> obSpeedList = new List<int>();
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
+        SoundPlayer beep = new SoundPlayer(Properties.Resources.beep);
+        SoundPlayer gameOverSound = new SoundPlayer(Properties.Resources.gameOver);
+        SoundPlayer pointSound = new SoundPlayer(Properties.Resources.point);
+        SoundPlayer openingSound = new SoundPlayer(Properties.Resources.opening);
 
         Random randGen = new Random();
         int randValue = 0;
@@ -108,6 +113,7 @@ namespace SpaceRace
 
         public void GameInitialize()
         {
+            openingSound.Play();
             titleLabel.Text = "";
             subTitleLabel.Text = "";
             p1ScoreOutput.Text = "0";
@@ -189,11 +195,13 @@ namespace SpaceRace
 
                 if (player1Rec.IntersectsWith(obRec))
                 {
+                    beep.Play();
                     player1X = 170;
                     player1Y = 340;
                 }
                 else if (player2Rec.IntersectsWith(obRec))
                 {
+                    beep.Play();
                     player2X = 400;
                     player2Y = 340; 
                 }
@@ -205,11 +213,13 @@ namespace SpaceRace
                 rightXScrollList[i] -= obSpeedList[i];
                 if (player1Rec.IntersectsWith(ob2Rec))
                 {
+                    beep.Play();
                     player1X = 170;
                     player1Y = 340;
                 }
                 else if (player2Rec.IntersectsWith(ob2Rec))
                 {
+                    beep.Play();
                     player2X = 400;
                     player2Y = 340;
                 }
@@ -217,6 +227,7 @@ namespace SpaceRace
 
             if (player1Y <= 5)
             {
+                pointSound.Play();
                 p1Score++;
                 player1X = 170;
                 player1Y = 340;
@@ -224,6 +235,7 @@ namespace SpaceRace
             }
             else if (player2Y <= 5)
             {
+                pointSound.Play();
                 p2Score++;
                 player2X = 400;
                 player2Y = 340;
@@ -267,6 +279,7 @@ namespace SpaceRace
             }
             else if (gameState == "gameOver")
             {
+                gameOverSound.Play();
                 titleLabel.Text = "GAME OVER";
                 subTitleLabel.Text = $"{winner} \n Press Space to Start, Escape to Exit";
                 p1ScoreOutput.Text = "";
