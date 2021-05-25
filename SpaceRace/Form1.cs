@@ -74,7 +74,7 @@ namespace SpaceRace
                 case Keys.Up:
                     upArrowDown = true;
                     break;
-                case Keys.Down:
+                case Keys.Down: 
                     downArrowDown = true;
                     break;
                 case Keys.W:
